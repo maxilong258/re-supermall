@@ -1,20 +1,19 @@
 <template>
-  <div>分类</div>
+  <div>{{ iid }}</div>
 </template>
 
 <script>
-
 export default {
-  name: "Category",
+  name: 'Detail',
   data() {
     return {
-      
+      iid: null
     }
   },
-  components: {
- 
+  created() {
+    this.iid = this.$route.params.iid
   }
-};
+}
 </script>
 
 <style scoped>

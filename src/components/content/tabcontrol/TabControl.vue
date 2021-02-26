@@ -4,7 +4,7 @@
       v-for="(item, index) in titles"
       :key="index"
       class="tab-control-item"
-      :class="{ active: index === currectIndex }"
+      :class="{ active: index === currentIndex }"
       @click="itemClick(index)"
     >
       <span>{{ item }}</span>
@@ -25,12 +25,13 @@ export default {
   },
   data() {
     return{
-      currectIndex: 0
+      currentIndex: 0
     }
   },
   methods: {
     itemClick(index) {
-      this.currectIndex = index
+      this.currentIndex = index
+      this.$emit('itemClick', index)
     }
   }
 }
