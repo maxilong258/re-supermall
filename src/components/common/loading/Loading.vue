@@ -12,8 +12,7 @@ export default {
 .loading {
   width: 100%;
   height: 88px;
-  background-color: #00afc0;
-  color: #fff;
+  color: #00afc0;
   font-size: 18px;
   text-align: center;
   line-height: 44px;
