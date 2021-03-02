@@ -27,11 +27,12 @@
         </div>
       </div>
     </div>
+    <div v-else class="no-comment">暂无评论</div>
   </div>
 </template>
 
 <script>
-import { formatDate } from "../../../common/utils";
+import { formatDate } from "common/utils";
 export default {
   name: "DetailCommentInfo",
   props: {
@@ -105,5 +106,13 @@ export default {
   width: 70px;
   height: 70px;
   margin-right: 5px;
+}
+
+.no-comment {
+  text-align: center;
+  padding: 10px 0 10px;
+  font-size: 17px;
+  color: #00afc0;
+  border-bottom: 5px solid #f2f5f8;
 }
 </style>

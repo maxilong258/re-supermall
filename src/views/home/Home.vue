@@ -28,10 +28,10 @@ import HomeRecommend from './childcomponents/HomeRecommend'
 import HomeFeatureView from './childcomponents/HomeFeatureView'
 import TabControl from 'components/content/tabcontrol/TabControl'
 import GoodsList from 'components/content/goodslist/GoodsList'
-import BackTop from 'components/content/backtop/BackTop'
 import Loading from 'components/common/loading/Loading'
 
 import { getHomeMultidata, getHomeGoods } from 'network/home'
+import { backTopMixin } from 'common/mixin'
 
 
 export default {
@@ -43,10 +43,9 @@ export default {
     HomeFeatureView,
     TabControl,
     GoodsList,
-    BackTop,
     Loading
   },
-
+  mixins: [ backTopMixin ],
   data() {
     return {
       banners: [],
@@ -57,7 +56,6 @@ export default {
         'sell': {page: 0, list: []}
       },
       currentType: 'pop',
-      showBackTop: false,
       scroll: 0
     }
   },
@@ -76,7 +74,7 @@ export default {
   },
 
   mounted() {
-     this.BackTopView()
+     
      //监听滚动 切换页面定位回原来的位置
      window.addEventListener('scroll', this.handleScroll);
      //监听滚动 触底时候调用上拉加载更多
@@ -118,16 +116,6 @@ export default {
       }
     },
 
-    BackTopView() {
-      window.addEventListener('scroll', () => {
-        if(document.documentElement.scrollTop > 939){
-          this.showBackTop = true
-        }else{
-          this.showBackTop = false
-        }
-      })
-    },
-
     tabClick(index) {
       switch(index) {
         case 0: 
@@ -140,10 +128,6 @@ export default {
           this.currentType = 'sell'
           break
       }
-    },
-
-    backTopClick() {
-      window.scrollTo(0, 0)
     },
 
     //网络请求相关方法

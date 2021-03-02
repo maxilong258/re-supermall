@@ -13,6 +13,7 @@
         :key="index"
         :src="item"
         alt=""
+        @load="loadimg"
       />
     </div>
   </div>
@@ -32,6 +33,11 @@ export default {
       imagesLength: 0,
     };
   },
+  methods: {
+    loadimg() {
+      this.$emit('loadimg')
+    }
+  }
 };
 </script>
 
