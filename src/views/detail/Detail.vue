@@ -26,6 +26,7 @@
     </div>
     <detail-bottom-bar @addToCart="addToCart"></detail-bottom-bar>
     <back-top @click.native="backTopClick" v-if="showBackTop"></back-top>
+    <toast :message="message" :show="show"></toast>
   </div>
 </template>
 
@@ -39,9 +40,11 @@ import DetailParamInfo from './childcomponents/DetailParamInfo'
 import DetailCommentInfo from './childcomponents/DetailCommentInfo'
 import GoodsList from 'components/content/goodslist/GoodsList'
 import DetailBottomBar from './childcomponents/DetailBottomBar'
+import Toast from 'components/common/toast/Toast'
 
 import { getDetail, getRecommend, GoodsInfo, Shop, GoodsParam } from 'network/detail'
 import { backTopMixin } from 'common/mixin'
+import { mapActions } from 'vuex'
 
 
 
@@ -58,7 +61,7 @@ export default {
     DetailCommentInfo,
     GoodsList,
     DetailBottomBar,
-
+    Toast
   },
   mixins: [ backTopMixin ],
   data() {
@@ -73,7 +76,8 @@ export default {
       recommends: [],
       topYs: [],
       currentIndex: 0,
-    
+      message: 'hhhhhh',
+      show: false
     }
   },
   created() {
@@ -110,6 +114,7 @@ export default {
   },
   
   methods: {
+    ...mapActions(['saveToCart']),
     titleClick(index) {
       switch(index) {
         case 0:
@@ -141,7 +146,16 @@ export default {
       product.desc = this.baseInfo.desc
       product.price = this.baseInfo.realPrice
       product.iid = this.iid
-      this.$store.dispatch('saveToCart', product)
+      this.saveToCart(product).then(res => {
+        // this.show = true
+        // this.message = res
+        // setTimeout(() => {
+        //   this.show = false
+        //   this.message = ''
+        // }, 1500)
+        this.$toast.show(res, 1500)
+        //console.log(this.$toast);
+      })
     }
   }
 }
@@ -159,7 +173,7 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 9999;
+  z-index: 99999;
   background-color: #fff;
 }
 

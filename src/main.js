@@ -3,7 +3,15 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import FastClick from 'fastclick'
+
+import toast from './components/common/toast'
+
 Vue.config.productionTip = false
+
+Vue.use(toast)
+
+FastClick.attach(document.body)
 
 new Vue({
   router,
